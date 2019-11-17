@@ -1,14 +1,40 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    // Android
+    ext.build_tools_version = '3.5.2'
     ext.kotlin_version = '1.3.41'
+    ext.appcompat_version = '1.1.0'
+    ext.material_version = '1.2.0-alpha01'
+    ext.constraint_layout_version = '1.1.3'
+    ext.navigation_version = '2.1.0'
+    ext.core_ktx_version = '1.1.0'
+    ext.activity_ktx_version = '1.1.0-rc02'
+    ext.fragment_ktx_version = '1.2.0-rc02'
+    ext.lifecycle_extensions_version = '2.2.0-rc02'
+
+    // Dagger
+    ext.dagger_version = '2.24'
+    ext.assisted_inject_version = '0.4.0'
+
+    // Timber
+    ext.timber_version = '4.7.1'
+
+    // Jsoup
+    ext.jsoup_version = '1.12.1'
+
+    // Testing
+    ext.junit_version = '4.12'
+    ext.runner_version = '1.2.0'
+    ext.espresso_core_version = '3.2.0'
+
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath "com.android.tools.build:gradle:$build_tools_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -19,7 +45,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
