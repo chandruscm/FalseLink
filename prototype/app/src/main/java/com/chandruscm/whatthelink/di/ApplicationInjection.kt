@@ -23,7 +23,7 @@ interface ApplicationComponent {
     }
 
     val homeViewModel: HomeViewModel
-    val verifyViewModel: VerifyViewModel
+    val verifyViewModelFactory: VerifyViewModel.Factory
 }
 
 @AssistedModule
