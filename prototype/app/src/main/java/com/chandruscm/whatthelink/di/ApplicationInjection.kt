@@ -1,6 +1,7 @@
 package com.chandruscm.whatthelink.di
 
 import android.content.Context
+import com.chandruscm.whatthelink.di.module.DatabaseModule
 import com.chandruscm.whatthelink.di.module.SharedPreferencesModule
 import com.chandruscm.whatthelink.ui.home.HomeViewModel
 import com.chandruscm.whatthelink.ui.verify.VerifyViewModel
@@ -13,7 +14,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     AssistedInjectModule::class,
-    SharedPreferencesModule::class
+    SharedPreferencesModule::class,
+    DatabaseModule::class
 ])
 interface ApplicationComponent {
 
