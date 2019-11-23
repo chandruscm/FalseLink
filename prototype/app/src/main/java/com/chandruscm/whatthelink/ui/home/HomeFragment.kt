@@ -5,22 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.chandruscm.whatthelink.databinding.FragmentHomeBinding
-import com.chandruscm.whatthelink.di.injector
-import com.chandruscm.whatthelink.di.viewModel
+import com.google.android.material.tabs.TabLayoutMediator
 
 /*
  * Show list of white-listed/blocked URLs and other preferences.
  */
 class HomeFragment : Fragment() {
 
-    private val viewModel by viewModel {
-        requireActivity().injector.homeViewModel
+    private val adapter by lazy {
+        WebsiteTabAdapter(this@HomeFragment)
     }
-
-    private val adapter = WebsiteAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,16 +23,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        subscribeUi()
+        with (binding) {
+            viewPager.adapter = adapter
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = adapter.getTabTitle(position)
+            }.attach()
+        }
         return binding.root
-    }
-
-    fun subscribeUi() {
-        viewModel.getWebsites().observe(viewLifecycleOwner, Observer { result ->
-            adapter.submitList(result)
-        })
     }
 }

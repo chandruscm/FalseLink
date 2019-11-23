@@ -26,6 +26,7 @@ data class Website(
         VIOLENCE,
         ADVERTISEMENT_SPAM,
         PHISHING,
-        ILLEGAL
+        ILLEGAL,
+        UNSECURE
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -13,21 +14,38 @@
             type="android.view.View.OnClickListener" />
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_medium"
-        android:clickable="true"
         android:focusable="true"
-        android:onClick="@{clickListener}">
+        android:clickable="true"
+        android:onClick="@{clickListener}"
+        android:background="?android:selectableItemBackground">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/website_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Website.url}"
-            tools:text="www.google.com"/>
+            android:text="@{Website.name}"
+            android:textSize="@dimen/font_medium"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Google"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/website_url"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:text="@{Website.url}"
+            android:textSize="@dimen/font_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/website_name"
+            tools:text="https://www.google.com/"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

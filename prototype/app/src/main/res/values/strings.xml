@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WhatTheLink</string>
+
+    <string name="tab_white_list">Safe</string>
+    <string name="tab_black_list">Blocked</string>
+
 </resources>

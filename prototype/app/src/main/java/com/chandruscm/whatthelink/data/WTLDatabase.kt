@@ -33,7 +33,7 @@ abstract class WTLDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): WTLDatabase {
             return Room.databaseBuilder(context, WTLDatabase::class.java, DATABASE_NAME)
-                    .createFromAsset("seed_white_list.db")
+                    .createFromAsset("seed_websites.db")
                     .build()
         }
     }

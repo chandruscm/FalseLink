@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chandruscm.whatthelink.data.Website
 import com.chandruscm.whatthelink.databinding.ListItemWebsiteBinding
 
-class WebsiteAdapter : ListAdapter<Website, WebsiteAdapter.ViewHolder>(DiffCallback()) {
+class WebsiteAdapter : ListAdapter<Website, WebsiteAdapter.ViewHolder>(
+    DiffCallback()
+) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val website = getItem(position)
@@ -20,7 +22,9 @@ class WebsiteAdapter : ListAdapter<Website, WebsiteAdapter.ViewHolder>(DiffCallb
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ListItemWebsiteBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false))
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
     }
 
     private fun createOnClickListener(): View.OnClickListener {

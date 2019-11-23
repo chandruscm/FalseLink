@@ -28,6 +28,7 @@ class ContentTypeConverter {
         ADVERTISEMENT_SPAM.ordinal -> ADVERTISEMENT_SPAM
         PHISHING.ordinal -> PHISHING
         ILLEGAL.ordinal -> ILLEGAL
+        UNSECURE.ordinal -> UNSECURE
         else -> Website.ContentType.UNVERIFIED
     }
 
