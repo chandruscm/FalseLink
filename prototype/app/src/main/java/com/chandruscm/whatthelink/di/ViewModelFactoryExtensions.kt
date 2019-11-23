@@ -1,3 +1,4 @@
+@file:Suppress("UNCHECKED_CAST")
 package com.chandruscm.whatthelink.di
 
 import androidx.activity.viewModels
