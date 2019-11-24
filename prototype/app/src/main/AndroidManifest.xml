@@ -2,10 +2,10 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.chandruscm.whatthelink">
+    package="com.chandruscm.falselink">
 
     <application
-        android:name=".WTLApplication"
+        android:name="com.chandruscm.falselink.WTLApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +15,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".ui.MainActivity">
+            android:name="com.chandruscm.falselink.ui.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".ui.verify.VerifyActivity"
+            android:name="com.chandruscm.falselink.ui.verify.VerifyActivity"
             android:excludeFromRecents="true"
             android:theme="@style/VerifyDialogTheme">
 

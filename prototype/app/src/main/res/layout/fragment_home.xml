@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.chandruscm.whatthelink.ui.home.HomeViewModel" />
+            type="com.chandruscm.falselink.ui.home.HomeViewModel" />
     </data>
 
     <LinearLayout

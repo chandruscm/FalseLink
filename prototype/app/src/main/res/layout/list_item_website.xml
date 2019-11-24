@@ -7,7 +7,7 @@
     <data>
         <variable
             name="website"
-            type="com.chandruscm.whatthelink.data.Website" />
+            type="com.chandruscm.falselink.data.Website" />
 
         <variable
             name="clickListener"
