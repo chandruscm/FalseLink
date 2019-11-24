@@ -13,4 +13,6 @@
     <dimen name="card_elevation">6dp</dimen>
     <dimen name="card_outer_margin">8dp</dimen>
 
+    <dimen name="dialog_corner_radius">6dp</dimen>
+
 </resources>
