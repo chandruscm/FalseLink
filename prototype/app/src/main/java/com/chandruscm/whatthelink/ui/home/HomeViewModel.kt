@@ -1,16 +1,22 @@
 package com.chandruscm.whatthelink.ui.home
 
-import androidx.lifecycle.ViewModel
-import com.chandruscm.whatthelink.data.WebsiteDao
-import com.chandruscm.whatthelink.utils.TAB_WEBSITE_FRAGMENT_WHITE_LIST
+import androidx.databinding.Bindable
+import com.chandruscm.whatthelink.managers.SharedPreferencesManager
+import com.chandruscm.whatthelink.utils.ObservableViewModel
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val websiteDao: WebsiteDao
-) : ViewModel() {
+    private val preferencesManager: SharedPreferencesManager
+) : ObservableViewModel() {
 
-    fun getWebsites(tabType: Int) = when (tabType) {
-        TAB_WEBSITE_FRAGMENT_WHITE_LIST -> websiteDao.getWhiteListedWebsites()
-        else -> websiteDao.getBlackListedWebsites()
-    }
+    /*
+     * Two-way data binding for the switch button
+     */
+    var verificationEnabled: Boolean
+        @Bindable get() {
+            return preferencesManager.isVerificationEnabled()
+        }
+        set(enable) {
+            preferencesManager.setVerificationEnabled(enable)
+        }
 }

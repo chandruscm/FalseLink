@@ -5,6 +5,7 @@ import com.chandruscm.whatthelink.di.module.DatabaseModule
 import com.chandruscm.whatthelink.di.module.SharedPreferencesModule
 import com.chandruscm.whatthelink.ui.home.HomeViewModel
 import com.chandruscm.whatthelink.ui.verify.VerifyViewModel
+import com.chandruscm.whatthelink.ui.website.WebsiteViewModel
 import com.squareup.inject.assisted.dagger2.AssistedModule
 import dagger.BindsInstance
 import dagger.Component
@@ -25,6 +26,7 @@ interface ApplicationComponent {
     }
 
     val homeViewModel: HomeViewModel
+    val websiteViewModel: WebsiteViewModel
     val verifyViewModelFactory: VerifyViewModel.Factory
 }
 

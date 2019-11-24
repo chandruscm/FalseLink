@@ -1,4 +1,4 @@
-package com.chandruscm.whatthelink.ui.home
+package com.chandruscm.whatthelink.ui.website
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,7 +26,7 @@ class WebsiteTabFragment : Fragment() {
     }
 
     private val viewModel by viewModel {
-        requireActivity().injector.homeViewModel
+        requireActivity().injector.websiteViewModel
     }
     private var tabType: Int = TAB_WEBSITE_FRAGMENT_WHITE_LIST
     private val adapter = WebsiteAdapter()

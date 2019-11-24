@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.chandruscm.whatthelink.databinding.FragmentHomeBinding
+import com.chandruscm.whatthelink.di.injector
+import com.chandruscm.whatthelink.di.viewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 /*
@@ -13,8 +15,12 @@ import com.google.android.material.tabs.TabLayoutMediator
  */
 class HomeFragment : Fragment() {
 
+    private val viewModel by viewModel {
+        requireActivity().injector.homeViewModel
+    }
+
     private val adapter by lazy {
-        WebsiteTabAdapter(this@HomeFragment)
+        HomeTabAdapter(this@HomeFragment)
     }
 
     override fun onCreateView(
@@ -24,6 +30,7 @@ class HomeFragment : Fragment() {
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
         with (binding) {
+            viewModel = this@HomeFragment.viewModel
             viewPager.adapter = adapter
             viewPager.offscreenPageLimit = 1
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->

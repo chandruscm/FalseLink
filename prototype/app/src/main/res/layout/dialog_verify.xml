@@ -15,7 +15,7 @@
         android:layout_marginStart="@dimen/spacing_small"
         android:indeterminate="true"
         android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/colorOrange"
+        android:indeterminateTint="@color/colorRed"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

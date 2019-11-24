@@ -3,11 +3,12 @@ package com.chandruscm.whatthelink.ui.home
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.chandruscm.whatthelink.R
+import com.chandruscm.whatthelink.ui.website.WebsiteTabFragment
 import com.chandruscm.whatthelink.utils.COUNT_WEBSITE_FRAGMENTS
 import com.chandruscm.whatthelink.utils.TAB_WEBSITE_FRAGMENT_BLACK_LIST
 import com.chandruscm.whatthelink.utils.TAB_WEBSITE_FRAGMENT_WHITE_LIST
 
-class WebsiteTabAdapter(
+class HomeTabAdapter(
     private val fragment: Fragment
 ) : FragmentStateAdapter(fragment) {
 

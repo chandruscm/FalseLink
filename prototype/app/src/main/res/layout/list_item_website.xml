@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="Website"
+            name="website"
             type="com.chandruscm.whatthelink.data.Website" />
 
         <variable
@@ -23,7 +23,9 @@
         android:focusable="true"
         android:clickable="true"
         android:onClick="@{clickListener}"
-        app:cardElevation="@dimen/card_elevation"
+        app:strokeColor="@color/strokeColor"
+        app:strokeWidth="1dp"
+        app:cardElevation="0dp"
         app:cardCornerRadius="@dimen/card_corner_radius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,23 +38,27 @@
                 android:id="@+id/website_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{Website.name}"
+                android:maxLines="1"
+                android:text="@{website.name}"
                 android:textSize="@dimen/font_medium"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Google"/>
+                tools:text="Google" />
 
             <TextView
                 android:id="@+id/website_url"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"
-                android:text="@{Website.url}"
+                android:text="@{website.url}"
                 android:textSize="@dimen/font_small"
+                android:textColor="@color/colorRed"
+                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/website_name"
+                app:verificationStatus="@{website.verificationStatus}"
                 tools:text="https://www.google.com/"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

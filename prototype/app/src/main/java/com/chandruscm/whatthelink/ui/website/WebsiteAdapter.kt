@@ -1,4 +1,4 @@
-package com.chandruscm.whatthelink.ui.home
+package com.chandruscm.whatthelink.ui.website
 
 import android.view.LayoutInflater
 import android.view.View
