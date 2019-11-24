@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
         with (binding) {
             viewPager.adapter = adapter
+            viewPager.offscreenPageLimit = 1
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = adapter.getTabTitle(position)
             }.attach()

@@ -14,38 +14,49 @@
             type="android.view.View.OnClickListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/card_outer_margin"
+        android:layout_marginStart="@dimen/card_outer_margin"
+        android:layout_marginEnd="@dimen/card_outer_margin"
         android:focusable="true"
         android:clickable="true"
         android:onClick="@{clickListener}"
-        android:background="?android:selectableItemBackground">
+        app:cardElevation="@dimen/card_elevation"
+        app:cardCornerRadius="@dimen/card_corner_radius">
 
-        <TextView
-            android:id="@+id/website_name"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{Website.name}"
-            android:textSize="@dimen/font_medium"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Google"/>
+            android:padding="@dimen/spacing_medium"
+            android:background="?android:selectableItemBackground">
 
-        <TextView
-            android:id="@+id/website_url"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_tiny"
-            android:text="@{Website.url}"
-            android:textSize="@dimen/font_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/website_name"
-            tools:text="https://www.google.com/"/>
+            <TextView
+                android:id="@+id/website_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Website.name}"
+                android:textSize="@dimen/font_medium"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Google"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/website_url"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:text="@{Website.url}"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/website_name"
+                tools:text="https://www.google.com/"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>
