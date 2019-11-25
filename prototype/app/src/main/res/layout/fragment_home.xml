@@ -17,14 +17,12 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:id="@+id/fragment_about_app_bar">
+            android:background="@android:color/white">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                android:id="@+id/fragment_about_collapse_bar">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
@@ -44,12 +42,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
                             android:paddingStart="4dp"
                             android:paddingEnd="4dp"
                             android:background="@android:color/black"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/font_extra_large"
-                            android:textAllCaps="true"
                             android:text="@string/app_name"/>
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -58,8 +56,7 @@
                             android:checked="@={viewModel.verificationEnabled}"
                             android:background="?android:selectableItemBackgroundBorderless"
                             android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:id="@+id/fragment_about_toolbar_back_button"/>
+                            android:layout_centerVertical="true"/>
 
                     </RelativeLayout>
 

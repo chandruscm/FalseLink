@@ -1,12 +1,12 @@
-package com.chandruscm.falselink.ui.home
+package com.chandruscm.falselink.ui.website
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.chandruscm.falselink.R
 import com.chandruscm.falselink.data.Website
-import com.chandruscm.falselink.data.Website.VerificationStatus.*
+import com.chandruscm.falselink.data.Website.VerificationStatus.WHITE_LISTED
 
-object HomeBindingAdapters {
+object WebsiteBindingAdapters {
 
     @BindingAdapter("verificationStatus")
     @JvmStatic
@@ -19,5 +19,4 @@ object HomeBindingAdapters {
             }
         }
     }
-
 }
