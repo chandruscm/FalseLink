@@ -23,4 +23,9 @@
         <item name="android:fontFamily">monospace</item>
     </style>
 
+    <style name="TextButtonStyle" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">?android:selectableItemBackground</item>
+    </style>
+
 </resources>
