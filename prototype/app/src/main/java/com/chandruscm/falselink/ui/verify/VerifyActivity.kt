@@ -4,11 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.chandruscm.falselink.R
 import com.chandruscm.falselink.data.Result
+import com.chandruscm.falselink.databinding.DialogVerifyBinding
 import com.chandruscm.falselink.di.injector
 import com.chandruscm.falselink.di.viewModel
+import kotlinx.android.synthetic.main.dialog_verify.*
+import timber.log.Timber
 
 /*
  * Shows the verify dialog when a URL is intercepted.
@@ -22,9 +27,11 @@ class VerifyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.dialog_verify)
-
-        subscribeUi()
+        val binding = DataBindingUtil.setContentView<DialogVerifyBinding>(
+            this, R.layout.dialog_verify
+        )
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
     }
 
     private fun subscribeUi() {
@@ -49,7 +56,8 @@ class VerifyActivity : AppCompatActivity() {
     }
 
     private fun showWarning() {
-
+        Timber.d("Expanding dialog")
+        dialog_verify_detail.isVisible = true
     }
 
     private fun showError() {

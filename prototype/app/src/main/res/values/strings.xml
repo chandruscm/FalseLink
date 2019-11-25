@@ -5,6 +5,13 @@
     <string name="tab_safe">safe</string>
     <string name="tab_blocked">blocked</string>
 
+    <string name="caution">warning</string>
+    <string name="caution_header">following issues were identified:</string>
+    <string name="issue_holder" formatted="false">• %s</string>
+
+    <string name="proceed">trust and proceed</string>
+    <string name="block">block</string>
+
     <string name="verifying">verifying link</string>
 
 </resources>

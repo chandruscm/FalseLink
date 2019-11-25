@@ -12,8 +12,11 @@ buildscript {
     ext.activity_ktx_version = '1.1.0-rc02'
     ext.fragment_ktx_version = '1.2.0-rc02'
     ext.lifecycle_extensions_version = '2.2.0-rc02'
-    ext.room_version = "2.2.2"
-    ext.viewpager_version = "1.0.0"
+    ext.room_version = '2.2.2'
+    ext.viewpager_version = '1.0.0'
+
+    // Lottie
+    ext.lottie_version = '3.2.2'
 
     // Dagger
     ext.dagger_version = '2.24'

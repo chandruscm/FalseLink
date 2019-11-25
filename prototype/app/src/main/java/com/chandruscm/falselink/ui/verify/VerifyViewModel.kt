@@ -2,6 +2,7 @@ package com.chandruscm.falselink.ui.verify
 
 import android.net.Uri
 import android.os.Handler
+import android.text.TextUtils
 import androidx.core.os.postDelayed
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -59,7 +60,9 @@ class VerifyViewModel @AssistedInject constructor(
          * 3.Use secret-sauce.
          */
         handler.postDelayed(5000) {
-            verificationResult.postValue(Result.Safe())
+            verificationResult.postValue(Result.Dangerous(TextUtils.join(
+                "\n• ", arrayOf("uses unsecure HTTP", "contains advertising spams")
+            )))
         }
     }
 
