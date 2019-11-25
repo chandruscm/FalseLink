@@ -2,8 +2,8 @@
 
     <string name="app_name">FalseLink</string>
 
-    <string name="tab_white_list">Safe</string>
-    <string name="tab_black_list">Blocked</string>
+    <string name="tab_white_list">safe</string>
+    <string name="tab_black_list">blocked</string>
 
     <string name="verifying">Verifying link</string>
 
