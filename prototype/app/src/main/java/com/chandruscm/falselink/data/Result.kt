@@ -1,7 +1,10 @@
 package com.chandruscm.falselink.data
 
-sealed class Result<out T> {
-    class loading<T> : Result<T>()
-    data class error<T>(val message: String) : Result<T>()
-    data class success<T>(val data: T) : Result<T>()
+/*
+ * Link verification result holder.
+ */
+sealed class Result<T> {
+    class Safe<T> : Result<T>()
+    class Dangerous<T>(val reason: String? = null) : Result<T>()
+    class Error<T>(val error: Throwable? = null) : Result<T>()
 }

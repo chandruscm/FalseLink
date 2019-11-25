@@ -5,8 +5,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.chandruscm.falselink.R
 import com.chandruscm.falselink.ui.website.WebsiteTabFragment
 import com.chandruscm.falselink.utils.COUNT_WEBSITE_FRAGMENTS
-import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_BLACK_LIST
-import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_WHITE_LIST
+import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_BLOCKED
+import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_SAFE
 
 class HomeTabAdapter(
     private val fragment: Fragment
@@ -14,8 +14,8 @@ class HomeTabAdapter(
 
     companion object {
         private val TAB_TITLES = arrayOf(
-            R.string.tab_white_list,
-            R.string.tab_black_list
+            R.string.tab_safe,
+            R.string.tab_blocked
         )
     }
 
@@ -24,7 +24,7 @@ class HomeTabAdapter(
     override fun getItemCount() = COUNT_WEBSITE_FRAGMENTS
 
     override fun createFragment(position: Int) = when (position) {
-        0 -> WebsiteTabFragment.newInstance(TAB_WEBSITE_FRAGMENT_WHITE_LIST)
-        else -> WebsiteTabFragment.newInstance(TAB_WEBSITE_FRAGMENT_BLACK_LIST)
+        0 -> WebsiteTabFragment.newInstance(TAB_WEBSITE_FRAGMENT_SAFE)
+        else -> WebsiteTabFragment.newInstance(TAB_WEBSITE_FRAGMENT_BLOCKED)
     }
 }

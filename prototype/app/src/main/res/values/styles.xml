@@ -15,6 +15,9 @@
     <style name="VerifyDialogTheme" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/verify_dialog_background</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorControlHighlight">@color/ripple</item>
+        <item name="android:fontFamily">monospace</item>
     </style>
 
     <style name="TabLayoutTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">

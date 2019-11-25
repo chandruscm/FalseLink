@@ -9,13 +9,13 @@ import androidx.room.Query
 interface WebsiteDao {
 
     @Query("SELECT * FROM websites WHERE verificationStatus = 1")
-    fun getWhiteListedWebsites(): LiveData<List<Website>>
+    fun getSafeWebsites(): LiveData<List<Website>>
 
     @Query("SELECT * FROM websites WHERE verificationStatus = 2")
-    fun getBlackListedWebsites(): LiveData<List<Website>>
+    fun getBlockedWebsites(): LiveData<List<Website>>
 
-    @Query("SELECT * FROM websites")
-    fun getAllWebsites(): LiveData<List<Website>>
+    @Query("SELECT * FROM websites WHERE url = :url")
+    suspend fun getWebsite(url: String?): Website?
 
     @Insert
     suspend fun addWebsite(website: Website)

@@ -9,13 +9,13 @@ data class Website(
     val id: Int = 0,
     val url: String = "",
     val name: String = "N/A",
-    val verificationStatus: VerificationStatus = VerificationStatus.UNVERIFIED,
+    val verificationStatus: VerificationStatus = VerificationStatus.UNASSIGNED,
     val contentType: ContentType = ContentType.UNVERIFIED
 ) {
     enum class VerificationStatus {
-        UNVERIFIED,
-        WHITE_LISTED,
-        BLACK_LISTED
+        UNASSIGNED,
+        SAFE,
+        BLOCKED
     }
 
     enum class ContentType {
@@ -29,4 +29,8 @@ data class Website(
         ILLEGAL,
         UNSECURE
     }
+
+    fun isSafe() = verificationStatus == VerificationStatus.SAFE
+
+    fun isBlocked() = verificationStatus == VerificationStatus.BLOCKED
 }

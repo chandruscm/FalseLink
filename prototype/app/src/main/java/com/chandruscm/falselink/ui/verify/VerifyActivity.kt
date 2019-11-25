@@ -6,9 +6,9 @@ import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.chandruscm.falselink.R
+import com.chandruscm.falselink.data.Result
 import com.chandruscm.falselink.di.injector
 import com.chandruscm.falselink.di.viewModel
-import timber.log.Timber
 
 /*
  * Shows the verify dialog when a URL is intercepted.
@@ -24,14 +24,16 @@ class VerifyActivity : AppCompatActivity() {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.dialog_verify)
 
-        Timber.d("Intercepted uri ${viewModel.getUri()}")
-        viewModel.verifyLink()
         subscribeUi()
     }
 
     private fun subscribeUi() {
-        viewModel.verificationStatus.observe(this, Observer { complete ->
-            if (complete) startBrowser()
+        viewModel.verificationResult.observe(this, Observer { result ->
+            when (result) {
+                is Result.Safe -> startBrowser()
+                is Result.Dangerous -> showWarning()
+                is Result.Error -> showError()
+            }
         })
     }
 
@@ -44,5 +46,13 @@ class VerifyActivity : AppCompatActivity() {
         }
         startActivity(intent)
         finish()
+    }
+
+    private fun showWarning() {
+
+    }
+
+    private fun showError() {
+
     }
 }

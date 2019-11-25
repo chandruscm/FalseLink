@@ -8,9 +8,9 @@ class VerificationStatusConverter {
 
     @TypeConverter
     fun toVerificationStatus(value: Int): Website.VerificationStatus = when (value) {
-        BLACK_LISTED.ordinal -> BLACK_LISTED
-        WHITE_LISTED.ordinal -> WHITE_LISTED
-        else -> Website.VerificationStatus.UNVERIFIED
+        BLOCKED.ordinal -> BLOCKED
+        SAFE.ordinal -> SAFE
+        else -> UNASSIGNED
     }
 
     @TypeConverter
@@ -29,7 +29,7 @@ class ContentTypeConverter {
         PHISHING.ordinal -> PHISHING
         ILLEGAL.ordinal -> ILLEGAL
         UNSECURE.ordinal -> UNSECURE
-        else -> Website.ContentType.UNVERIFIED
+        else -> UNVERIFIED
     }
 
     @TypeConverter

@@ -10,7 +10,7 @@ object DatabaseModule {
 
     @Provides
     @JvmStatic
-    fun provideDb(context: Context) = WTLDatabase.getInstance(context)
+    fun provideDb(context: Context) = WTLDatabase.getDatabase(context)
 
     @Provides
     @JvmStatic
