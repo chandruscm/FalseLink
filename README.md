@@ -13,5 +13,6 @@ To achieve this, FalseLink uses 2 stages of verification:
 Existing solutions either requires the user to continually share their browsing information with 3rd parties or simply black-lists websites that are considered to be known bad-actors. Leveraging on-device machine learning enables us to perform low-latency-real-time verification on the device without ever having to share the user’s browsing information.
 
 # Screens
+* Verification step has been mocked for demonstration purposes.
 
 <img src="images/1.gif" width="30%" /> <img src="images/2.gif" width="30%" /> <img src="images/3.gif" width="30%" />
