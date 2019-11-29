@@ -14,4 +14,13 @@
 
     <string name="verifying">verifying link</string>
 
+    <string name="protocol_http">uses unsecure HTTP</string>
+    <string name="protocol_cert_expired">uses expired certificate</string>
+    <string name="content_type_adult">contains adult content</string>
+    <string name="content_type_betting_gambling">contains betting or gambling content</string>
+    <string name="content_type_violence">contains violent or graphic content</string>
+    <string name="content_type_advertisement">contains advertisement spam</string>
+    <string name="content_type_phishing">impersonating a different organisation</string>
+    <string name="content_type_illegal">contains illicit content</string>
+
 </resources>

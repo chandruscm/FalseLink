@@ -28,7 +28,6 @@ class WebsiteAdapter : ListAdapter<Website, WebsiteAdapter.ViewHolder>(
 
     private fun createOnClickListener(): View.OnClickListener {
         return View.OnClickListener {
-//            Toast.makeText(it.context, "Clicked", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -49,10 +48,10 @@ class WebsiteAdapter : ListAdapter<Website, WebsiteAdapter.ViewHolder>(
 private class DiffCallback : DiffUtil.ItemCallback<Website>() {
 
     override fun areItemsTheSame(oldItem: Website, newItem: Website): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.host == newItem.host
     }
 
     override fun areContentsTheSame(oldItem: Website, newItem: Website): Boolean {
-        return oldItem.url == newItem.url
+        return oldItem == newItem
     }
 }

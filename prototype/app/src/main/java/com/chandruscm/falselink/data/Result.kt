@@ -1,10 +1,15 @@
 package com.chandruscm.falselink.data
 
-/*
- * Link verification result holder.
+/**
+ * Verification result holder.
+ * - Trusted : Website found in db safelist
+ * - Safe : Verified Safe (HTTPS & NORMAL)
+ * - Dangerous : Verified Dangerous (!HTTP || !NORMAL)
+ * - Error : Verification failed
  */
 sealed class Result<T> {
-    class Safe<T> : Result<T>()
-    class Dangerous<T>(val reason: String? = null) : Result<T>()
+    class Trusted<T> : Result<T>()
+    class Safe<T>(val website: Website) : Result<T>()
+    class Dangerous<T>(val website: Website) : Result<T>()
     class Error<T>(val error: Throwable? = null) : Result<T>()
 }

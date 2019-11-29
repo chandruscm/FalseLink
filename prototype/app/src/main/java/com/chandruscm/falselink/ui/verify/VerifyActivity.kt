@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.chandruscm.falselink.R
@@ -12,8 +11,7 @@ import com.chandruscm.falselink.data.Result
 import com.chandruscm.falselink.databinding.DialogVerifyBinding
 import com.chandruscm.falselink.di.injector
 import com.chandruscm.falselink.di.viewModel
-import kotlinx.android.synthetic.main.dialog_verify.*
-import timber.log.Timber
+import com.chandruscm.falselink.utils.onClick
 
 /*
  * Shows the verify dialog when a URL is intercepted.
@@ -32,16 +30,32 @@ class VerifyActivity : AppCompatActivity() {
         )
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        binding.proceedButton.onClick(::saveAndProceed)
+        binding.blockButton.onClick(::block)
+
+        subscibeUi()
     }
 
-    private fun subscribeUi() {
+    private fun subscibeUi() {
         viewModel.verificationResult.observe(this, Observer { result ->
             when (result) {
+                is Result.Trusted -> startBrowser()
                 is Result.Safe -> startBrowser()
-                is Result.Dangerous -> showWarning()
-                is Result.Error -> showError()
+                is Result.Error -> startBrowser()
             }
         })
+    }
+
+    private fun saveAndProceed() {
+        viewModel.addWebsiteToSafeList().invokeOnCompletion {
+            startBrowser()
+        }
+    }
+
+    private fun block() {
+        viewModel.addWebsiteToBlockedList().invokeOnCompletion {
+            finish()
+        }
     }
 
     private fun startBrowser() {
@@ -53,14 +67,5 @@ class VerifyActivity : AppCompatActivity() {
         }
         startActivity(intent)
         finish()
-    }
-
-    private fun showWarning() {
-        Timber.d("Expanding dialog")
-        dialog_verify_detail.isVisible = true
-    }
-
-    private fun showError() {
-
     }
 }

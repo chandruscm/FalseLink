@@ -1,14 +1,18 @@
 package com.chandruscm.falselink.data
 
 import javax.inject.Inject
+import com.chandruscm.falselink.data.Website.Status.SAFE
+import com.chandruscm.falselink.data.Website.Status.BLOCKED
 
 class WebsiteRepository @Inject constructor(
     private val websiteDao: WebsiteDao
 ) {
 
-    suspend fun getWebsite(url: String?) = websiteDao.getWebsite(url)
+    suspend fun addWebsite(website: Website?) = websiteDao.insertOrUpdate(website)
 
-    fun getSafeWebsites() = websiteDao.getSafeWebsites()
+    suspend fun getWebsite(host: String?) = websiteDao.getWebsiteByHost(host)
 
-    fun getBlockedWebsites() = websiteDao.getBlockedWebsites()
+    fun getSafeWebsites() = websiteDao.getWebsitesByStatus(SAFE)
+
+    fun getBlockedWebsites() = websiteDao.getWebsitesByStatus(BLOCKED)
 }

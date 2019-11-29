@@ -13,8 +13,9 @@ import com.chandruscm.falselink.utils.DATABASE_NAME
     exportSchema = false
 )
 @TypeConverters(value = [
-    VerificationStatusConverter::class,
-    ContentTypeConverter::class
+    WebsiteProtocolConverter::class,
+    WebsiteStatusConverter::class,
+    WebsiteVerificationResultConverter::class
 ])
 abstract class WTLDatabase : RoomDatabase() {
 

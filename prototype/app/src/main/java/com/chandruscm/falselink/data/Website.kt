@@ -5,32 +5,41 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "websites")
 data class Website(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val url: String = "",
-    val name: String = "N/A",
-    val verificationStatus: VerificationStatus = VerificationStatus.UNASSIGNED,
-    val contentType: ContentType = ContentType.UNVERIFIED
+    val protocol: Protocol,
+    @PrimaryKey
+    val host: String,
+    val name: String,
+    var status: Status,
+    val type: ContentType
 ) {
-    enum class VerificationStatus {
-        UNASSIGNED,
+
+    enum class Protocol {
+        HTTP,
+        HTTPS,
+        CERT_EXPIRED
+    }
+
+    /**
+     * Status of a website
+     * - can be changed by the user.
+     */
+    enum class Status {
         SAFE,
         BLOCKED
     }
 
+    /**
+     * Result after verifying the website.
+     */
     enum class ContentType {
-        UNVERIFIED,
         NORMAL,
         ADULT,
         BETTING_GAMBLING,
         VIOLENCE,
         ADVERTISEMENT_SPAM,
         PHISHING,
-        ILLEGAL,
-        UNSECURE
+        ILLEGAL
     }
 
-    fun isSafe() = verificationStatus == VerificationStatus.SAFE
-
-    fun isBlocked() = verificationStatus == VerificationStatus.BLOCKED
+    fun isSafe() = status == Status.SAFE
 }

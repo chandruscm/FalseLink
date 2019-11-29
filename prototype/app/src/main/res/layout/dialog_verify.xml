@@ -81,7 +81,7 @@
             tools:text="• Uses HTTP"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/proceed_button"
+            android:id="@+id/block_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
@@ -95,7 +95,7 @@
             style="@style/SolidButtonStyle.Red"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/add_button"
+            android:id="@+id/proceed_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
@@ -103,7 +103,7 @@
             android:layout_marginBottom="@dimen/spacing_medium"
             android:padding="@dimen/spacing_small"
             android:text="@string/proceed"
-            app:layout_constraintEnd_toStartOf="@+id/proceed_button"
+            app:layout_constraintEnd_toStartOf="@+id/block_button"
             app:layout_constraintTop_toBottomOf="@+id/issue_text_view"
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/TextButtonStyle"/>
@@ -113,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="separator_line,dialog_header,issue_text_view,add_button,proceed_button" />
+            app:constraint_referenced_ids="separator_line,dialog_header,issue_text_view,proceed_button,block_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
