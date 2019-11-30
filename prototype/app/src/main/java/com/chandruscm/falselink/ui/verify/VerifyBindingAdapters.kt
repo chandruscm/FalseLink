@@ -15,22 +15,34 @@ import com.chandruscm.falselink.utils.getProtocolMessage
 
 object VerifyBindingAdapters {
 
+    /**
+     * Show the detail view if the website is dangerous.
+     */
     @BindingAdapter("verifyViewModel")
     @JvmStatic
     fun bindVerificationResult(view: View, verificationResult: LiveData<Result<Unit>>) {
         val result = verificationResult.value
         when (result) {
             is Result.Dangerous -> {
+                /**
+                 * Replace loading animation with alert animation
+                 */
                 view.findViewById<LottieAnimationView>(R.id.dialog_icon).apply {
                     setAnimation(R.raw.alert_circle)
                     resumeAnimation()
                 }
+                /**
+                 * Show the detail view to display issue information.
+                 */
                 view.findViewById<Group>(R.id.dialog_verify_detail).apply {
                     isVisible = true
                 }
                 view.findViewById<TextView>(R.id.dialog_title).apply {
                     text = view.resources.getString(R.string.caution)
                 }
+                /**
+                 * Set issue messages based on the protocol and content type.
+                 */
                 val messages = arrayOf(
                     getProtocolMessage(view.resources, result.website.protocol),
                     getContentTypeMessage(view.resources, result.website.type)
@@ -41,6 +53,9 @@ object VerifyBindingAdapters {
                         TextUtils.join("\n• ", messages))
                 }
             }
+            /**
+             * TODO: How to handle verification errors? UX or UserSafety?
+             */
             is Result.Error -> {
 
             }

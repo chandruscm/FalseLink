@@ -5,6 +5,9 @@ import com.chandruscm.falselink.data.Website.Protocol.*
 import com.chandruscm.falselink.data.Website.Status.*
 import com.chandruscm.falselink.data.Website.ContentType.*
 
+/**
+ * Room TypeConverters for the enum fields.
+ */
 class WebsiteProtocolConverter {
 
     @TypeConverter
@@ -32,10 +35,10 @@ class WebsiteStatusConverter {
     fun toInteger(status: Website.Status): Int = status.ordinal
 }
 
-class WebsiteVerificationResultConverter {
+class WebsiteContentTypeConverter {
 
     @TypeConverter
-    fun toVerificationResult(value: Int): Website.ContentType = when (value) {
+    fun toContentType(value: Int): Website.ContentType = when (value) {
         NORMAL.ordinal -> NORMAL
         ADULT.ordinal -> ADULT
         BETTING_GAMBLING.ordinal -> BETTING_GAMBLING

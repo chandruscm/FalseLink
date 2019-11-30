@@ -8,6 +8,9 @@ import com.chandruscm.falselink.data.Website.Status.SAFE
 
 object WebsiteBindingAdapters {
 
+    /**
+     * Set url text color based on the website status.
+     */
     @BindingAdapter("verificationStatus")
     @JvmStatic
     fun bindVerificationStatus(textView: TextView, status: Website.Status) {

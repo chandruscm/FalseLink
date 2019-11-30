@@ -16,6 +16,9 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * Single source of truth for verification.
+ */
 class VerificationManager @Inject constructor(
     private val preferencesManager: SharedPreferencesManager,
     private val repository: WebsiteRepository
@@ -29,6 +32,7 @@ class VerificationManager @Inject constructor(
 
     /**
      * Expose the immutable verificationResult to the observer.
+     * Run coroutine using viewModelScope
      */
     fun verify(uri: Uri?, scope: CoroutineScope): LiveData<Result<Unit>> {
         scope.launch {

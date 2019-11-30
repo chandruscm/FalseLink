@@ -26,6 +26,9 @@ class VerifyViewModel @AssistedInject constructor(
 
     val verificationResult: LiveData<Result<Unit>>
 
+    /**
+     * Start verification as soon as url is obtained.
+     */
     init {
         verificationResult =
             verificationManager.verify(uri, viewModelScope)
@@ -45,5 +48,8 @@ class VerifyViewModel @AssistedInject constructor(
         })
     }
 
+    /**
+     * TODO: Return the final expanded urls for shortened urls
+     */
     fun getUri() = uri
 }

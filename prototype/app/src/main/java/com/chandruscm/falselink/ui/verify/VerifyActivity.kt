@@ -36,6 +36,11 @@ class VerifyActivity : AppCompatActivity() {
         subscibeUi()
     }
 
+    /**
+     * Observe for verification result, also observed by binding adapter.
+     * TODO: Should all safe websites be added to the db?
+     * TODO: How to handle verification errors? UX or UserSafety?
+     */
     private fun subscibeUi() {
         viewModel.verificationResult.observe(this, Observer { result ->
             when (result) {
@@ -46,18 +51,30 @@ class VerifyActivity : AppCompatActivity() {
         })
     }
 
+    /**
+     * Allows dangerous websites to be safelisted and opened.
+     * Open browser after db update is complete.
+     */
     private fun saveAndProceed() {
         viewModel.addWebsiteToSafeList().invokeOnCompletion {
             startBrowser()
         }
     }
 
+    /**
+     * Add dangerous website to blocked list.
+     * Close dialog after db update is complete.
+     */
     private fun block() {
         viewModel.addWebsiteToBlockedList().invokeOnCompletion {
             finish()
         }
     }
 
+    /**
+     * Pass the final url to the default browser.
+     * TODO: Get the package name of the default browser.
+     */
     private fun startBrowser() {
         val intent = Intent().apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

@@ -15,15 +15,17 @@ import com.chandruscm.falselink.utils.DATABASE_NAME
 @TypeConverters(value = [
     WebsiteProtocolConverter::class,
     WebsiteStatusConverter::class,
-    WebsiteVerificationResultConverter::class
+    WebsiteContentTypeConverter::class
 ])
 abstract class WTLDatabase : RoomDatabase() {
 
     abstract fun websiteDao(): WebsiteDao
 
     companion object {
-        // Singleton prevents multiple instances of database opening at the
-        // same time.
+        /**
+         * Singleton prevents multiple instances of database opening at the
+         * same time.
+         */
         @Volatile
         private var INSTANCE: WTLDatabase? = null
 
