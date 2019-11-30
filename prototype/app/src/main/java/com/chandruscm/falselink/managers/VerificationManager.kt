@@ -2,7 +2,6 @@ package com.chandruscm.falselink.managers
 
 import android.net.Uri
 import android.os.Handler
-import androidx.core.os.postDelayed
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.chandruscm.falselink.data.Result
@@ -12,7 +11,10 @@ import com.chandruscm.falselink.data.Website.Protocol.*
 import com.chandruscm.falselink.data.Website.ContentType.*
 import com.chandruscm.falselink.data.WebsiteRepository
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.jsoup.Jsoup
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -57,18 +59,12 @@ class VerificationManager @Inject constructor(
              * 3.Use secret-sauce.
              */
             Timber.d("Using secret sauce.")
-            handler.postDelayed(5000) {
-                verificationResult.postValue(Result.Dangerous(
-                    Website(
-                        protocol = HTTP,
-                        host = "test-website.com",
-                        name = "Test",
-                        status = BLOCKED,
-                        type = PHISHING
-                    )
-                ))
-            }
+            val document = getWebsiteDom(uri)
         }
         return verificationResult
+    }
+
+    private suspend fun getWebsiteDom(uri: Uri?) = withContext(Dispatchers.IO) {
+        return@withContext Jsoup.connect(uri?.toString()).get()
     }
 }
