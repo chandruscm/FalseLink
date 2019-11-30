@@ -27,6 +27,7 @@
         <activity
             android:name="com.chandruscm.falselink.ui.verify.VerifyActivity"
             android:excludeFromRecents="true"
+            android:documentLaunchMode="always"
             android:theme="@style/VerifyDialogTheme">
 
             <intent-filter>

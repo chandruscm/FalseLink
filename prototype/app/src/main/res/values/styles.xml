@@ -6,15 +6,20 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:colorControlHighlight">@color/ripple</item>
+        <item name="android:colorControlHighlight">@color/strokeColor</item>
         <item name="android:fontFamily">monospace</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme"/>
 
     <style name="VerifyDialogTheme" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/verify_dialog_background</item>
+        <item name="android:colorControlHighlight">@color/strokeColor</item>
+        <item name="android:fontFamily">monospace</item>
     </style>
 
     <style name="TabLayoutTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
@@ -23,9 +28,23 @@
         <item name="android:fontFamily">monospace</item>
     </style>
 
+    <style name="SolidButtonStyle" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="SolidButtonStyle.Red">
+        <item name="android:backgroundTint">@color/colorRed</item>
+    </style>
+
     <style name="TextButtonStyle" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="rippleColor">@color/strokeColor</item>
+        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
 </resources>

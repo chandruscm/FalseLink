@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chandruscm.falselink.databinding.TabWebsitesBinding
 import com.chandruscm.falselink.di.injector
 import com.chandruscm.falselink.di.viewModel
-import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_WHITE_LIST
+import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_SAFE
 import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_TYPE
 
 class WebsiteTabFragment : Fragment() {
@@ -28,7 +28,7 @@ class WebsiteTabFragment : Fragment() {
     private val viewModel by viewModel {
         requireActivity().injector.websiteViewModel
     }
-    private var tabType: Int = TAB_WEBSITE_FRAGMENT_WHITE_LIST
+    private var tabType: Int = TAB_WEBSITE_FRAGMENT_SAFE
     private val adapter = WebsiteAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,22 +1,27 @@
 package com.chandruscm.falselink.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
+import com.chandruscm.falselink.data.Website.Status
 
 @Dao
 interface WebsiteDao {
 
-    @Query("SELECT * FROM websites WHERE verificationStatus = 1")
-    fun getWhiteListedWebsites(): LiveData<List<Website>>
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertWebsite(website: Website?): Long
 
-    @Query("SELECT * FROM websites WHERE verificationStatus = 2")
-    fun getBlackListedWebsites(): LiveData<List<Website>>
+    @Update
+    suspend fun updateWebsite(website: Website?)
 
-    @Query("SELECT * FROM websites")
-    fun getAllWebsites(): LiveData<List<Website>>
+    @Transaction
+    suspend fun insertOrUpdate(website: Website?) {
+        val result = insertWebsite(website)
+        if (result == -1L) updateWebsite(website)
+    }
 
-    @Insert
-    suspend fun addWebsite(website: Website)
+    @Query("SELECT * FROM websites WHERE host = :host")
+    suspend fun getWebsiteByHost(host: String?): Website?
+
+    @Query("SELECT * FROM websites WHERE status = :status")
+    fun getWebsitesByStatus(status: Status): LiveData<List<Website>>
 }

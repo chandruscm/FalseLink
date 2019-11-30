@@ -2,9 +2,25 @@
 
     <string name="app_name">FalseLink</string>
 
-    <string name="tab_white_list">safe</string>
-    <string name="tab_black_list">blocked</string>
+    <string name="tab_safe">safe</string>
+    <string name="tab_blocked">blocked</string>
 
-    <string name="verifying">Verifying link</string>
+    <string name="caution">warning</string>
+    <string name="caution_header">following issues were identified:</string>
+    <string name="issue_holder" formatted="false">• %s</string>
+
+    <string name="proceed">trust and proceed</string>
+    <string name="block">block</string>
+
+    <string name="verifying">verifying link</string>
+
+    <string name="protocol_http">uses unsecure HTTP</string>
+    <string name="protocol_cert_expired">uses expired certificate</string>
+    <string name="content_type_adult">contains adult content</string>
+    <string name="content_type_betting_gambling">contains betting or gambling content</string>
+    <string name="content_type_violence">contains violent or graphic content</string>
+    <string name="content_type_advertisement">contains advertisement spam</string>
+    <string name="content_type_phishing">impersonating a different organisation</string>
+    <string name="content_type_illegal">contains illicit content</string>
 
 </resources>

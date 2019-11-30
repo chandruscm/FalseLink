@@ -13,28 +13,36 @@ import com.chandruscm.falselink.utils.DATABASE_NAME
     exportSchema = false
 )
 @TypeConverters(value = [
-    VerificationStatusConverter::class,
-    ContentTypeConverter::class
+    WebsiteProtocolConverter::class,
+    WebsiteStatusConverter::class,
+    WebsiteContentTypeConverter::class
 ])
 abstract class WTLDatabase : RoomDatabase() {
 
     abstract fun websiteDao(): WebsiteDao
 
     companion object {
-
+        /**
+         * Singleton prevents multiple instances of database opening at the
+         * same time.
+         */
         @Volatile
-        private var instance: WTLDatabase? = null
+        private var INSTANCE: WTLDatabase? = null
 
-        fun getInstance(context: Context): WTLDatabase {
-            return instance ?: synchronized(this) {
-                instance ?: buildDatabase(context).also { instance = it }
+        fun getDatabase(context: Context): WTLDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
             }
-        }
-
-        private fun buildDatabase(context: Context): WTLDatabase {
-            return Room.databaseBuilder(context, WTLDatabase::class.java, DATABASE_NAME)
-                    .createFromAsset("seed_websites.db")
-                    .build()
+            synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    WTLDatabase::class.java,
+                    DATABASE_NAME
+                ).createFromAsset("seed_websites.db").build()
+                INSTANCE = instance
+                return instance
+            }
         }
     }
 }
