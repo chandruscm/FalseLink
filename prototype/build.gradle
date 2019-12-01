@@ -28,6 +28,9 @@ buildscript {
     // Jsoup
     ext.jsoup_version = '1.12.1'
 
+    // TensorFlowLite
+    ext.tensorflow_version = '2.0.0'
+
     // Testing
     ext.junit_version = '4.12'
     ext.runner_version = '1.2.0'

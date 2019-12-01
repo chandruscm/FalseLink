@@ -65,6 +65,9 @@ dependencies {
     // Jsoup
     implementation "org.jsoup:jsoup:$jsoup_version"
 
+    // TensorFlowLite
+    implementation "org.tensorflow:tensorflow-lite:$tensorflow_version"
+
     // Testing
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test:runner:$runner_version"
