@@ -14,7 +14,7 @@ class WebsiteProtocolConverter {
     fun toProtocol(value: Int): Website.Protocol = when (value) {
         HTTP.ordinal -> HTTP
         HTTPS.ordinal -> HTTPS
-        CERT_EXPIRED.ordinal -> CERT_EXPIRED
+        BAD_CERT.ordinal -> BAD_CERT
         else -> throw Error("Invalid website protocol.")
     }
 

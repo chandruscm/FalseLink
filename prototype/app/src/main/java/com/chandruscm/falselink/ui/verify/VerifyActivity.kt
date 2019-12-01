@@ -1,6 +1,7 @@
 package com.chandruscm.falselink.ui.verify
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
@@ -44,9 +45,7 @@ class VerifyActivity : AppCompatActivity() {
     private fun subscibeUi() {
         viewModel.verificationResult.observe(this, Observer { result ->
             when (result) {
-                is Result.Trusted -> startBrowser()
-                is Result.Safe -> startBrowser()
-                is Result.Error -> startBrowser()
+                is Result.Safe -> startBrowser(result.uri)
             }
         })
     }
@@ -75,11 +74,11 @@ class VerifyActivity : AppCompatActivity() {
      * Pass the final url to the default browser.
      * TODO: Get the package name of the default browser.
      */
-    private fun startBrowser() {
+    private fun startBrowser(uri: Uri? = viewModel.getUri()) {
         val intent = Intent().apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             setAction(Intent.ACTION_VIEW)
-            setData(viewModel.getUri())
+            setData(uri)
             setPackage("com.android.chrome")
         }
         startActivity(intent)

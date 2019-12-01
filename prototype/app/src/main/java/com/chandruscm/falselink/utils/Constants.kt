@@ -30,7 +30,7 @@ const val PREF_VERIFICATION_ENABLE = "PREF_VERIFICATION_ENABLE"
 fun getProtocolMessage(resources: Resources, protocol: Website.Protocol): String? {
     return when (protocol) {
         HTTP -> resources.getString(R.string.protocol_http)
-        CERT_EXPIRED -> resources.getString(R.string.protocol_cert_expired)
+        BAD_CERT -> resources.getString(R.string.protocol_cert_expired)
         else -> null
     }
 }

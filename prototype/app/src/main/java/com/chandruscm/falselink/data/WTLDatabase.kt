@@ -39,7 +39,7 @@ abstract class WTLDatabase : RoomDatabase() {
                     context.applicationContext,
                     WTLDatabase::class.java,
                     DATABASE_NAME
-                ).createFromAsset("seed_websites.db").build()
+                ).createFromAsset("db/seed_websites.db").build()
                 INSTANCE = instance
                 return instance
             }

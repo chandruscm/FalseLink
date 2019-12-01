@@ -24,33 +24,36 @@ object VerifyBindingAdapters {
         val result = verificationResult.value
         when (result) {
             is Result.Dangerous -> {
-                /**
-                 * Replace loading animation with alert animation
-                 */
-                view.findViewById<LottieAnimationView>(R.id.dialog_icon).apply {
-                    setAnimation(R.raw.alert_circle)
-                    resumeAnimation()
-                }
-                /**
-                 * Show the detail view to display issue information.
-                 */
-                view.findViewById<Group>(R.id.dialog_verify_detail).apply {
-                    isVisible = true
-                }
-                view.findViewById<TextView>(R.id.dialog_title).apply {
-                    text = view.resources.getString(R.string.caution)
-                }
-                /**
-                 * Set issue messages based on the protocol and content type.
-                 */
-                val messages = arrayOf(
-                    getProtocolMessage(view.resources, result.website.protocol),
-                    getContentTypeMessage(view.resources, result.website.type)
-                )
-                view.findViewById<TextView>(R.id.issue_text_view).apply {
-                    text = view.resources.getString(
-                        R.string.issue_holder,
-                        TextUtils.join("\n• ", messages))
+                with(result.website) {
+                    /**
+                     * Replace loading animation with alert animation
+                     */
+                    view.findViewById<LottieAnimationView>(R.id.dialog_icon).apply {
+                        setAnimation(R.raw.alert_circle)
+                        resumeAnimation()
+                    }
+                    /**
+                     * Show the detail view to display issue information.
+                     */
+                    view.findViewById<Group>(R.id.dialog_verify_detail).apply {
+                        isVisible = true
+                    }
+                    view.findViewById<TextView>(R.id.dialog_title).apply {
+                        text = view.resources.getString(R.string.caution)
+                    }
+                    /**
+                     * Set issue messages based on the protocol and content type.
+                     */
+                    val messages = arrayOf(
+                        getProtocolMessage(view.resources, protocol),
+                        getContentTypeMessage(view.resources, type)
+                    )
+                    view.findViewById<TextView>(R.id.issue_text_view).apply {
+                        text = view.resources.getString(
+                            R.string.issue_holder,
+                            TextUtils.join("\n• ", messages)
+                        )
+                    }
                 }
             }
             /**

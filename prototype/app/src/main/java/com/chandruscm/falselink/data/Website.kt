@@ -13,10 +13,13 @@ data class Website(
     val type: ContentType
 ) {
 
+    /**
+     * All hosting issues are considered BAD_CERT
+     */
     enum class Protocol {
         HTTP,
         HTTPS,
-        CERT_EXPIRED
+        BAD_CERT
     }
 
     /**

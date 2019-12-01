@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chandruscm.falselink.data.Result
+import com.chandruscm.falselink.data.Website
 import com.chandruscm.falselink.data.Website.Status.SAFE
 import com.chandruscm.falselink.data.Website.Status.BLOCKED
+import com.chandruscm.falselink.data.Website.ContentType.*
 import com.chandruscm.falselink.data.WebsiteRepository
 import com.chandruscm.falselink.managers.VerificationManager
 import com.squareup.inject.assisted.Assisted
@@ -30,26 +32,30 @@ class VerifyViewModel @AssistedInject constructor(
      * Start verification as soon as url is obtained.
      */
     init {
-        verificationResult =
-            verificationManager.verify(uri, viewModelScope)
+        verificationResult = verificationManager.verify(
+                uri = uri,
+                scope = viewModelScope
+            )
     }
 
     fun addWebsiteToSafeList() = viewModelScope.launch {
-        val website = (verificationResult.value as Result.Dangerous).website
-        repository.addWebsite(website.apply {
-            status = SAFE
-        })
+        with(verificationResult.value as Result.Dangerous) {
+            repository.addWebsite(website.apply {
+                status = SAFE
+            })
+        }
     }
 
     fun addWebsiteToBlockedList() = viewModelScope.launch {
-        val website = (verificationResult.value as Result.Dangerous).website
-        repository.addWebsite(website.apply {
-            status = BLOCKED
-        })
+        with(verificationResult.value as Result.Dangerous) {
+            repository.addWebsite(website.apply {
+                status = BLOCKED
+            })
+        }
     }
 
     /**
-     * TODO: Return the final expanded urls for shortened urls
+     * Return the original url if verification fails.
      */
     fun getUri() = uri
 }
