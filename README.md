@@ -15,7 +15,7 @@ Existing solutions either requires the user to continually share their browsing 
 
 **Demo and Project Overview** : [https://www.youtube.com/watch?v=EfTHhnq321E](https://www.youtube.com/watch?v=EfTHhnq321E)
 
-**AndroidDevChallenge submission** (download and view) : [WTLCoverLetter.pdf](submission/WTLCoverLetter.pdf), [WTLCoverLetter.docx](submission/WTLCoverLetter.docx) 
+**AndroidDevChallenge submission** (Please download and view since GitHub may not render some pages in the pdf.) : [WTLCoverLetter.pdf](submission/WTLCoverLetter.pdf), [WTLCoverLetter.docx](submission/WTLCoverLetter.docx) 
 
 Screens (GIF)
 -------
