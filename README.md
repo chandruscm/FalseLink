@@ -15,7 +15,20 @@ Existing solutions either requires the user to continually share their browsing 
 
 **Demo and Project Overview** : [https://www.youtube.com/watch?v=EfTHhnq321E](https://www.youtube.com/watch?v=EfTHhnq321E)
 
-**AndroidDevChallenge submission** (Please download and view since GitHub may not render some pages in the pdf.) : [WTLCoverLetter.pdf](submission/WTLCoverLetter.pdf), [WTLCoverLetter.docx](submission/WTLCoverLetter.docx) 
+**AndroidDevChallenge submission** (Please download and view since GitHub may not render some pages in the pdf.) : [WTLCoverLetter.pdf](submission/WTLCoverLetter.pdf), [WTLCoverLetter.docx](submission/WTLCoverLetter.docx)
+
+Setup Overview
+-----------------
+* Kotlin
+* MVVM Clean Architecture
+* Dagger2
+* Navigation Component
+* Room
+* Coroutines
+* Databinding
+* Android Material
+* Jsoup HTML Parser
+* TensorFlowLite
 
 Screens (GIF)
 -------
