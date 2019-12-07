@@ -46,16 +46,18 @@
 
         <TextView
             android:id="@+id/dialog_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:ellipsize="end"
             android:padding="@dimen/spacing_large"
             android:text="@string/verifying"
             android:textColor="@android:color/black"
             android:textSize="@dimen/font_medium"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/separator_line"
-            app:layout_constraintStart_toEndOf="@id/dialog_icon" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dialog_icon"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/separator_line"

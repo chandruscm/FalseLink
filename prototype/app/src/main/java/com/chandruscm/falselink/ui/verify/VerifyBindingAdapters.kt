@@ -16,6 +16,7 @@
 
 package com.chandruscm.falselink.ui.verify
 
+import android.graphics.Typeface
 import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
@@ -40,7 +41,7 @@ object VerifyBindingAdapters {
         val result = verificationResult.value
         when (result) {
             is Result.Dangerous -> {
-                with(result.website) {
+                with(result) {
                     /**
                      * Replace loading animation with alert animation
                      */
@@ -55,14 +56,15 @@ object VerifyBindingAdapters {
                         isVisible = true
                     }
                     view.findViewById<TextView>(R.id.dialog_title).apply {
-                        text = view.resources.getString(R.string.caution)
+                        text = uri?.toString() ?:
+                                view.resources.getString(R.string.caution_header)
                     }
                     /**
                      * Set issue messages based on the protocol and content type.
                      */
                     val messages = arrayOf(
-                        getProtocolMessage(view.resources, protocol),
-                        getContentTypeMessage(view.resources, type)
+                        getProtocolMessage(view.resources, website.protocol),
+                        getContentTypeMessage(view.resources, website.type)
                     )
                     view.findViewById<TextView>(R.id.issue_text_view).apply {
                         text = view.resources.getString(
