@@ -17,11 +17,13 @@
 
 <inset
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetLeft="@dimen/spacing_medium"
-    android:insetRight="@dimen/spacing_medium">
+    android:insetLeft="30dp"
+    android:insetRight="30dp">
     <shape android:shape="rectangle">
-        <size android:height="2dp" />
-        <corners android:radius="1dp" />
+        <size android:height="2.5dp" />
+        <corners
+            android:topLeftRadius="3dp"
+            android:topRightRadius="3dp" />
         <solid android:color="?colorPrimary" />
     </shape>
 </inset>
