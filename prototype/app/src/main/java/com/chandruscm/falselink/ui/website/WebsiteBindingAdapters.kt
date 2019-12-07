@@ -16,11 +16,13 @@
 
 package com.chandruscm.falselink.ui.website
 
+import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.chandruscm.falselink.R
 import com.chandruscm.falselink.data.Website
 import com.chandruscm.falselink.data.Website.Status.SAFE
+import com.google.android.material.card.MaterialCardView
 
 object WebsiteBindingAdapters {
 
@@ -29,12 +31,22 @@ object WebsiteBindingAdapters {
      */
     @BindingAdapter("verificationStatus")
     @JvmStatic
-    fun bindVerificationStatus(textView: TextView, status: Website.Status) {
-        with(textView) {
+    fun bindVerificationStatus(view: View, status: Website.Status) {
+        with(view) {
             if (status == SAFE) {
-                setTextColor(context.getColor(R.color.colorBlue))
+                findViewById<MaterialCardView>(R.id.list_item_card).apply {
+                    setRippleColorResource(R.color.colorBlueRipple)
+                }
+                findViewById<TextView>(R.id.website_url).apply {
+                    setTextColor(context.getColor(R.color.colorBlue))
+                }
             } else {
-                setTextColor(context.getColor(R.color.colorRed))
+                findViewById<MaterialCardView>(R.id.list_item_card).apply {
+                    setRippleColorResource(R.color.colorRedRipple)
+                }
+                findViewById<TextView>(R.id.website_url).apply {
+                    setTextColor(context.getColor(R.color.colorRed))
+                }
             }
         }
     }

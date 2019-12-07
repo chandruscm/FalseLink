@@ -31,6 +31,7 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/list_item_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/card_outer_margin"
@@ -45,7 +46,8 @@
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:strokeWidth="1dp"
-        app:strokeColor="@color/strokeColor">
+        app:strokeColor="@color/strokeColor"
+        app:verificationStatus="@{website.status}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/list_item_constraint"
@@ -76,7 +78,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/website_name"
-                app:verificationStatus="@{website.status}"
                 tools:text="https://www.google.com/"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
