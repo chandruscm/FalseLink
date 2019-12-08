@@ -16,15 +16,18 @@
 
 package com.chandruscm.falselink.utils
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.view.View
+import androidx.databinding.ViewDataBinding
 import org.jsoup.nodes.Document
 
 /**
  * Construct base URL string with protocol and host
  */
 fun Uri.formatted(): String {
-    return scheme + "://" + host
+    return "$scheme://$host"
 }
 
 /**
@@ -49,10 +52,40 @@ fun Document.hostUri(): String? {
 }
 
 /**
+ * Open the uri in the preferred browser.
+ * TODO: Get the package name of the default browser.
+ */
+fun openWebsiteUri(context: Context, uri: Uri?) {
+    val intent = Intent().apply {
+        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        setAction(Intent.ACTION_VIEW)
+        setData(uri)
+        setPackage("com.android.chrome")
+    }
+    context.startActivity(intent)
+}
+
+/**
  * an onClick function with an [action] that does not pass
  * the view that has been clicked (in contract to @see View.setOnClickListener)
  * This enables better usage of function references
  */
 fun View.onClick(action: () -> Unit) {
     setOnClickListener { action() }
+}
+
+/**
+ * Reference iosched https://github.com/google/iosched
+ * Compatibility removeIf since it was added in API 24
+ */
+fun <T> MutableCollection<T>.compatRemoveIf(predicate: (T) -> Boolean): Boolean {
+    val it = iterator()
+    var removed = false
+    while (it.hasNext()) {
+        if (predicate(it.next())) {
+            it.remove()
+            removed = true
+        }
+    }
+    return removed
 }

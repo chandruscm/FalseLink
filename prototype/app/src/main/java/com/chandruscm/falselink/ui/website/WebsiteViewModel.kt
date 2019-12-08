@@ -17,8 +17,11 @@
 package com.chandruscm.falselink.ui.website
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.chandruscm.falselink.data.Website
 import com.chandruscm.falselink.data.WebsiteRepository
 import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_SAFE
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class WebsiteViewModel @Inject constructor(
@@ -28,5 +31,13 @@ class WebsiteViewModel @Inject constructor(
     fun getWebsites(tabType: Int) = when (tabType) {
         TAB_WEBSITE_FRAGMENT_SAFE -> repository.getSafeWebsites()
         else -> repository.getBlockedWebsites()
+    }
+
+    fun removeWebsite(website: Website) = viewModelScope.launch {
+        repository.removeWebsite(website)
+    }
+
+    fun moveWebsite(website: Website) = viewModelScope.launch {
+        repository.moveWebsite(website)
     }
 }

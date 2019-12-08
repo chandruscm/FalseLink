@@ -26,8 +26,12 @@
             type="com.chandruscm.falselink.data.Website" />
 
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
+            name="isExpanded"
+            type="Boolean" />
+
+        <variable
+            name="actionHandler"
+            type="com.chandruscm.falselink.ui.website.WebsiteActionsHandler" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -37,11 +41,8 @@
         android:layout_marginTop="@dimen/card_outer_margin"
         android:layout_marginStart="@dimen/card_outer_margin"
         android:layout_marginEnd="@dimen/card_outer_margin"
-        android:clipChildren="false"
-        android:clipToPadding="false"
         android:focusable="true"
         android:clickable="true"
-        android:onClick="@{clickListener}"
         app:cardElevation="0dp"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="@dimen/card_corner_radius"
@@ -53,6 +54,8 @@
             android:id="@+id/list_item_constraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:padding="@dimen/spacing_medium">
 
             <TextView
@@ -61,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:text="@{website.name}"
+                android:textColor="@android:color/black"
                 android:textSize="@dimen/font_medium"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +83,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/website_name"
                 tools:text="https://www.google.com/"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/visit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@string/visit"
+                android:onClick="@{() -> actionHandler.visit(website)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/website_url"
+                app:layout_constraintBottom_toBottomOf="parent"
+                style="@style/SolidButtonStyle.Black"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/move_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:text="@string/move_blocked"
+                android:onClick="@{() -> actionHandler.move(website)}"
+                app:layout_constraintEnd_toStartOf="@+id/visit_button"
+                app:layout_constraintTop_toBottomOf="@+id/website_url"
+                app:layout_constraintBottom_toBottomOf="parent"
+                style="@style/TextButtonStyle.Black"/>
+
+            <ImageView
+                android:id="@+id/remove_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_delete"
+                android:onClick="@{() -> actionHandler.remove(website)}"
+                app:layout_constraintTop_toTopOf="@id/visit_button"
+                app:layout_constraintBottom_toBottomOf="@id/visit_button"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="remove_button,move_button,visit_button"
+                app:goneUnless="@{isExpanded}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

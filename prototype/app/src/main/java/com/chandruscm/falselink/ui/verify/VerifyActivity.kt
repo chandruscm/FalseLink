@@ -29,6 +29,7 @@ import com.chandruscm.falselink.databinding.DialogVerifyBinding
 import com.chandruscm.falselink.di.injector
 import com.chandruscm.falselink.di.viewModel
 import com.chandruscm.falselink.utils.onClick
+import com.chandruscm.falselink.utils.openWebsiteUri
 
 /*
  * Shows the verify dialog when a URL is intercepted.
@@ -88,16 +89,9 @@ class VerifyActivity : AppCompatActivity() {
 
     /**
      * Pass the final url to the default browser.
-     * TODO: Get the package name of the default browser.
      */
     private fun startBrowser(uri: Uri? = viewModel.getUri()) {
-        val intent = Intent().apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            setAction(Intent.ACTION_VIEW)
-            setData(uri)
-            setPackage("com.android.chrome")
-        }
-        startActivity(intent)
+        openWebsiteUri(this, uri)
         finish()
     }
 }

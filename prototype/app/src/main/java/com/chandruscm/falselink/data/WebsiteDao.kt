@@ -26,6 +26,9 @@ interface WebsiteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertWebsite(website: Website?): Long
 
+    @Delete
+    suspend fun removeWebsite(website: Website?)
+
     @Update
     suspend fun updateWebsite(website: Website?)
 

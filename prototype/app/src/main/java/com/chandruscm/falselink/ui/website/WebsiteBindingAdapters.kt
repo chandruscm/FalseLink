@@ -18,10 +18,12 @@ package com.chandruscm.falselink.ui.website
 
 import android.view.View
 import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.databinding.BindingAdapter
 import com.chandruscm.falselink.R
 import com.chandruscm.falselink.data.Website
 import com.chandruscm.falselink.data.Website.Status.SAFE
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
 object WebsiteBindingAdapters {
@@ -40,6 +42,9 @@ object WebsiteBindingAdapters {
                 findViewById<TextView>(R.id.website_url).apply {
                     setTextColor(context.getColor(R.color.colorBlue))
                 }
+                findViewById<MaterialButton>(R.id.move_button).apply {
+                    setText(R.string.move_blocked)
+                }
             } else {
                 findViewById<MaterialCardView>(R.id.list_item_card).apply {
                     setRippleColorResource(R.color.colorRedRipple)
@@ -47,7 +52,16 @@ object WebsiteBindingAdapters {
                 findViewById<TextView>(R.id.website_url).apply {
                     setTextColor(context.getColor(R.color.colorRed))
                 }
+                findViewById<MaterialButton>(R.id.move_button).apply {
+                    setText(R.string.move_safe)
+                }
             }
         }
+    }
+
+    @BindingAdapter("goneUnless")
+    @JvmStatic
+    fun goneUnless(view: Group, visible: Boolean) {
+        view.visibility = if (visible) View.VISIBLE else View.GONE
     }
 }

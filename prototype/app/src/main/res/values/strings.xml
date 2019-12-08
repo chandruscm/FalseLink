@@ -27,6 +27,9 @@
 
     <string name="proceed">trust and proceed</string>
     <string name="block">block</string>
+    <string name="visit">visit</string>
+    <string name="move_safe">move to safe</string>
+    <string name="move_blocked">move to blocked</string>
 
     <string name="verifying">verifying link</string>
 

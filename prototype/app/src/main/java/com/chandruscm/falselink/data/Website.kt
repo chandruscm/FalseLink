@@ -16,6 +16,7 @@
 
 package com.chandruscm.falselink.data
 
+import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -61,4 +62,10 @@ data class Website(
     }
 
     fun isSafe() = status == Status.SAFE
+
+    /**
+     * All http urls will be redirected anyway.
+     * User explicitly chooses to visit.
+     */
+    fun getUri() = Uri.parse("http://$host")
 }

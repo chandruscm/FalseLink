@@ -16,6 +16,7 @@
 
 package com.chandruscm.falselink.ui.website
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,13 +24,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.chandruscm.falselink.data.Website
 import com.chandruscm.falselink.databinding.TabWebsitesBinding
 import com.chandruscm.falselink.di.injector
 import com.chandruscm.falselink.di.viewModel
 import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_SAFE
 import com.chandruscm.falselink.utils.TAB_WEBSITE_FRAGMENT_TYPE
+import com.chandruscm.falselink.utils.openWebsiteUri
 
-class WebsiteTabFragment : Fragment() {
+class WebsiteTabFragment : Fragment(), WebsiteActionsHandler {
 
     companion object {
         @JvmStatic
@@ -45,7 +48,9 @@ class WebsiteTabFragment : Fragment() {
         requireActivity().injector.websiteViewModel
     }
     private var tabType: Int = TAB_WEBSITE_FRAGMENT_SAFE
-    private val adapter = WebsiteAdapter()
+
+    private lateinit var binding: TabWebsitesBinding
+    private lateinit var adapter: WebsiteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,17 +64,39 @@ class WebsiteTabFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = TabWebsitesBinding.inflate(inflater, container, false)
+        binding = TabWebsitesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        adapter = WebsiteAdapter(this, savedInstanceState)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         subscribeUi()
-        return binding.root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        adapter.onSaveInstanceState(outState)
     }
 
     private fun subscribeUi() {
         viewModel.getWebsites(tabType).observe(viewLifecycleOwner, Observer { websites ->
             adapter.submitList(websites)
         })
+    }
+
+    override fun remove(website: Website) {
+        viewModel.removeWebsite(website)
+    }
+
+    override fun move(website: Website) {
+        viewModel.moveWebsite(website)
+    }
+
+    override fun visit(website: Website) {
+        openWebsiteUri(requireContext(), website.getUri())
     }
 }

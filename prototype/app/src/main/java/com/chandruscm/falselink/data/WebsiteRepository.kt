@@ -26,6 +26,12 @@ class WebsiteRepository @Inject constructor(
 
     suspend fun addWebsite(website: Website?) = websiteDao.insertOrUpdate(website)
 
+    suspend fun removeWebsite(website: Website?) = websiteDao.removeWebsite(website)
+
+    suspend fun moveWebsite(website: Website?) = websiteDao.updateWebsite(website?.apply {
+        status = if (status == SAFE) BLOCKED else SAFE
+    })
+
     suspend fun getWebsite(host: String?) = websiteDao.getWebsiteByHost(host)
 
     fun getSafeWebsites() = websiteDao.getWebsitesByStatus(SAFE)
