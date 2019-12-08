@@ -91,7 +91,7 @@
                 android:layout_marginTop="@dimen/spacing_small"
                 android:text="@string/visit"
                 android:onClick="@{() -> actionHandler.visit(website)}"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/website_url"
                 app:layout_constraintBottom_toBottomOf="parent"
                 style="@style/SolidButtonStyle.Black"/>
@@ -101,10 +101,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_marginStart="@dimen/spacing_small"
                 android:text="@string/move_blocked"
                 android:onClick="@{() -> actionHandler.move(website)}"
-                app:layout_constraintEnd_toStartOf="@+id/visit_button"
+                app:layout_constraintStart_toEndOf="@+id/visit_button"
                 app:layout_constraintTop_toBottomOf="@+id/website_url"
                 app:layout_constraintBottom_toBottomOf="parent"
                 style="@style/TextButtonStyle.Black"/>
@@ -118,9 +118,9 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_delete"
                 android:onClick="@{() -> actionHandler.remove(website)}"
-                app:layout_constraintTop_toTopOf="@id/visit_button"
-                app:layout_constraintBottom_toBottomOf="@id/visit_button"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/move_button"
+                app:layout_constraintBottom_toBottomOf="@id/move_button"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.constraintlayout.widget.Group
                 android:layout_width="wrap_content"
