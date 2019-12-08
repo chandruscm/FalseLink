@@ -67,5 +67,5 @@ data class Website(
      * All http urls will be redirected anyway.
      * User explicitly chooses to visit.
      */
-    fun getUri() = Uri.parse("http://$host")
+    fun getUri() = Uri.parse("http://" + host)
 }

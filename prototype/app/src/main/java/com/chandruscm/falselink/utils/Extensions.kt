@@ -27,7 +27,7 @@ import org.jsoup.nodes.Document
  * Construct base URL string with protocol and host
  */
 fun Uri.formatted(): String {
-    return "$scheme://$host"
+    return scheme + "://" + host
 }
 
 /**
