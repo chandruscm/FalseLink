@@ -20,7 +20,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import androidx.databinding.ViewDataBinding
+import android.webkit.URLUtil
+import com.chandruscm.falselink.data.Website
+import com.chandruscm.falselink.data.Website.Protocol.HTTPS
+import com.chandruscm.falselink.data.Website.Protocol.HTTP
 import org.jsoup.nodes.Document
 
 /**
@@ -42,6 +45,13 @@ fun Document.baseUriObject(): Uri? {
  */
 fun Document.host(): String {
     return Uri.parse(baseUri()).host ?: baseUri()
+}
+
+/**
+ * Check protocol from Jsoup Document
+ */
+fun Document.protocol(): Website.Protocol {
+    return if (URLUtil.isHttpsUrl(baseUri())) HTTPS else HTTP
 }
 
 /**

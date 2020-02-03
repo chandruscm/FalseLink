@@ -16,10 +16,34 @@
 
 package com.chandruscm.falselink.tf
 
+import android.content.Context
+import android.content.res.AssetFileDescriptor
+import org.tensorflow.lite.Interpreter
+import timber.log.Timber
+import java.io.FileInputStream
+import java.nio.MappedByteBuffer
+import java.nio.channels.FileChannel
 import javax.inject.Inject
 
-class UrlClassificationClient @Inject constructor(
+class UrlClassificationClient @Inject constructor(private val context: Context) {
 
-) {
+    private val modelInterpreter by lazy {
+        Interpreter(loadModelFile("tf/model.tflite"))
+    }
 
+    private fun loadModelFile(modelName: String): MappedByteBuffer {
+        val fileDescriptor: AssetFileDescriptor = context.assets.openFd(modelName)
+        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
+        val fileChannel: FileChannel = inputStream.channel
+        val startOffset: Long = fileDescriptor.startOffset
+        val declaredLength: Long = fileDescriptor.declaredLength
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+    }
+
+    fun modelInference(featureInput: Array<FloatArray>): Float {
+        val resultArray = arrayOf(floatArrayOf(0f))
+        modelInterpreter.run(featureInput, resultArray)
+        Timber.d("Confidence : ${resultArray[0][0]}")
+        return resultArray[0][0]
+    }
 }

@@ -28,6 +28,7 @@ class WebParseClient @Inject constructor() {
         return@withContext Jsoup
             .connect(uri)
             .userAgent(buildUserAgentString())
+            .timeout(10000)
             .get()
     }
 

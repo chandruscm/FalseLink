@@ -16,7 +16,6 @@
 
 package com.chandruscm.falselink.ui.verify
 
-import android.graphics.Typeface
 import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
@@ -27,6 +26,7 @@ import androidx.lifecycle.LiveData
 import com.airbnb.lottie.LottieAnimationView
 import com.chandruscm.falselink.R
 import com.chandruscm.falselink.data.Result
+import com.chandruscm.falselink.data.Website.Protocol.HTTP
 import com.chandruscm.falselink.utils.getContentTypeMessage
 import com.chandruscm.falselink.utils.getProtocolMessage
 
@@ -62,10 +62,12 @@ object VerifyBindingAdapters {
                     /**
                      * Set issue messages based on the protocol and content type.
                      */
-                    val messages = arrayOf(
-                        getProtocolMessage(view.resources, website.protocol),
-                        getContentTypeMessage(view.resources, website.type)
-                    )
+                    val messages = arrayListOf<String>()
+                    if (website.protocol == HTTP) {
+                        messages.add(getProtocolMessage(view.resources, website.protocol))
+                    }
+                    messages.add(getContentTypeMessage(view.resources, website.type))
+
                     view.findViewById<TextView>(R.id.issue_text_view).apply {
                         text = view.resources.getString(
                             R.string.issue_holder,

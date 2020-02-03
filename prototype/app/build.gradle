@@ -29,6 +29,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    aaptOptions {
+        noCompress "tflite"
+        noCompress "lite"
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -82,7 +86,7 @@ dependencies {
     implementation "org.jsoup:jsoup:$jsoup_version"
 
     // TensorFlowLite
-    implementation "org.tensorflow:tensorflow-lite:$tensorflow_version"
+    implementation "org.tensorflow:tensorflow-lite:+"
 
     // Testing
     testImplementation "junit:junit:$junit_version"

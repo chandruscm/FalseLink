@@ -21,14 +21,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.chandruscm.falselink.data.Result
 import com.chandruscm.falselink.data.Website
-import com.chandruscm.falselink.data.Website.Protocol.*
 import com.chandruscm.falselink.data.Website.Status.*
 import com.chandruscm.falselink.data.Website.ContentType.*
 import com.chandruscm.falselink.data.WebsiteRepository
 import com.chandruscm.falselink.jsoup.WebParseClient
+import com.chandruscm.falselink.tf.UrlClassificationClient
 import com.chandruscm.falselink.utils.baseUriObject
 import com.chandruscm.falselink.utils.host
 import com.chandruscm.falselink.utils.hostUri
+import com.chandruscm.falselink.utils.protocol
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.jsoup.nodes.Document
@@ -42,11 +43,15 @@ import javax.inject.Inject
 class VerificationManager @Inject constructor(
     private val preferencesManager: SharedPreferencesManager,
     private val repository: WebsiteRepository,
-    private val webParser: WebParseClient
+    private val webParser: WebParseClient,
+    private val urlClassificationClient: UrlClassificationClient
 ) {
 
     private var title: String = "Website"
     private lateinit var dom: Document
+
+    private var finalUrl: String = ""
+    private var featureInput = arrayOf(floatArrayOf(0f, 0f, 0f, 0f, 0f))
 
     private val verificationResult = MutableLiveData<Result<Unit>>()
 
@@ -59,6 +64,7 @@ class VerificationManager @Inject constructor(
      */
     fun verify(uri: Uri?, scope: CoroutineScope): LiveData<Result<Unit>> {
         scope.launch {
+
             /**
              * 1.Check if user has enabled active verification.
              * - consider every website as Trusted if disabled.
@@ -72,10 +78,16 @@ class VerificationManager @Inject constructor(
              * 2.Get the dom with the final URL.
              */
             try {
+                Timber.d("Attempting to parse URL ${uri?.toString()}")
                 dom = webParser.getDom(uri?.toString())
                 title = webParser.getDom(dom.hostUri()).title()
+                finalUrl = dom.baseUriObject().toString()
+                Timber.d("Final redirected URL is $finalUrl")
+
             } catch (exception: IOException) {
+                Timber.d("Failed to parse URL due")
                 verificationResult.postValue(Result.Error(exception))
+                exception.printStackTrace()
                 return@launch
             }
             /**
@@ -94,23 +106,72 @@ class VerificationManager @Inject constructor(
                 Timber.d("Website found in db, skipping verification.")
                 return@launch
             }
+
             /**
-             * 4.Use secret-sauce.
-             * TODO: Provide error messages to user.
-             * TODO: Plug-in tensorflow models.
+            * 4. Run the TensorFlowLite model
+            */
+            Timber.d("Running the TensorFlowLite model")
+
+            /*
+             * Feature 1: Length of URL
              */
-            Timber.d("Using secret sauce.")
-            verificationResult.postValue(Result.Dangerous(
-                    uri = dom.baseUriObject(),
-                    website = Website(
-                        protocol = HTTP,
-                        host = dom.host(),
-                        name = title,
-                        status = BLOCKED,
-                        type = ADVERTISEMENT_SPAM
-                    )
+            val urlLength = finalUrl.length
+            featureInput[0][0] = when {
+                urlLength < 54 -> 0f
+                urlLength in 54..75 -> 2f
+                else -> 1f
+            }
+            Timber.d("Feature 1: Uri Length $urlLength Input ${featureInput[0][0]}")
+
+            /*
+             * Feature 2: Contains "@" symbol
+             */
+            featureInput[0][1] = if (finalUrl.contains("@")) 1f else 0f
+            Timber.d("Feature 2: @ symbol Input ${featureInput[0][1]}")
+
+            /*
+             * Feature 3: Contains "//"
+             */
+            featureInput[0][2] = if (finalUrl.contains("//")) 1f else 0f
+            Timber.d("Feature 3: // symbol Input ${featureInput[0][2]}")
+
+            /*
+             * Feature 4: Contains "-" symbol
+             */
+            featureInput[0][3] = if (finalUrl.contains("-")) 1f else 0f
+            Timber.d("Feature 4: - symbol Input ${featureInput[0][3]}")
+
+            /*
+             * Feature 5: Contains more than one sub-domain
+             */
+            val dotCount = finalUrl.count { it.equals(".") }
+            featureInput[0][4] = when {
+                dotCount < 3 -> 0f
+                dotCount == 3 -> 2f
+                else -> 1f
+            }
+            Timber.d("Feature 5: . symbol count ${featureInput[0][4]}")
+
+            urlClassificationClient.modelInference(featureInput).let { confidence ->
+                verificationResult.postValue(
+                    if (confidence > 0.51f) {
+                        Result.Safe(
+                            uri = dom.baseUriObject()
+                        )
+                    } else {
+                        Result.Dangerous(
+                            uri = dom.baseUriObject(),
+                            website = Website(
+                                protocol = dom.protocol(),
+                                host = dom.host(),
+                                name = title,
+                                status = BLOCKED,
+                                type = PHISHING
+                            )
+                        )
+                    }
                 )
-            )
+            }
         }
         return verificationResult
     }
